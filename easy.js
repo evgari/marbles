@@ -44,7 +44,8 @@
       const player = getNumber();
       const computer = getRandomIntInclusive();
 
-      if ((player % 2 && computer % 2) || (player % 2 === 0 && computer % 2 === 0)) {;
+      if ((player % 2 && computer % 2) ||
+        (player % 2 === 0 && computer % 2 === 0)) {
         marblesCount.player -= player;
         marblesCount.computer += player;
       } else {
@@ -64,3 +65,4 @@
 
   window.marbles = game;
 })();
+
