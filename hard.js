@@ -133,6 +133,14 @@
       } else {
         console.log('Конец игры');
       }
+
+      if (confirm('Сыграть ещё?')) {
+        marblesCount.player = 5;
+        marblesCount.computer = 5;
+        return start();
+      } else {
+        return;
+      }
     };
   };
 
