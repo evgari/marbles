@@ -34,7 +34,7 @@
       },
     };
 
-    function playerTurn() {
+    const playerTurn = () => {
       console.log(`
         Количество шариков
         Игрок: ${marblesCount.player}
@@ -59,9 +59,9 @@
       if (marblesCount.checkMarbles()) {
         return botTurn();
       }
-    }
+    };
 
-    function botTurn() {
+    const botTurn = () => {
       console.log(`
         Количество шариков
         Игрок: ${marblesCount.player}
@@ -84,7 +84,7 @@
       if (marblesCount.checkMarbles()) {
         return playerTurn();
       }
-    }
+    };
 
     return function start() {
       console.log('Старт игры');
