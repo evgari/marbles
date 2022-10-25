@@ -21,6 +21,21 @@
     return getNumber(min, max);
   };
 
+  const getFigure = arr => {
+    const str = prompt(`${arr.join(', ')}?`);
+
+    if (str !== null) {
+      const figure = str[0].toLowerCase();
+
+      if (figure === arr[0][0]) return arr[0];
+      if (figure === arr[1][0]) return arr[1];
+      if (figure === arr[2][0]) return arr[2];
+      return getFigure(arr);
+    } else {
+      return null;
+    }
+  };
+
   const game = () => {
     const marblesCount = {
       player: 5,
@@ -83,21 +98,6 @@
 
       if (marblesCount.checkMarbles()) {
         return playerTurn();
-      }
-    };
-
-    const getFigure = arr => {
-      const str = prompt(`${arr.join(', ')}?`);
-
-      if (str !== null) {
-        const figure = str[0].toLowerCase();
-
-        if (figure === arr[0][0]) return arr[0];
-        if (figure === arr[1][0]) return arr[1];
-        if (figure === arr[2][0]) return arr[2];
-        return getFigure(arr);
-      } else {
-        return null;
       }
     };
 
