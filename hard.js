@@ -97,7 +97,7 @@
         if (figure === arr[2][0]) return arr[2];
         return getFigure(arr);
       } else {
-        return getFigure(arr);
+        return null;
       }
     };
 
@@ -105,6 +105,8 @@
       const figures = ['камень', 'ножницы', 'бумага'];
       const player = getFigure(figures);
       const computer = figures[getRandomIntInclusive(0, 2)];
+
+      if (player === null) return null;
 
       if (player === figures[0] && computer === figures[1] ||
         player === figures[1] && computer === figures[2] ||
