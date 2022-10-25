@@ -7,62 +7,75 @@
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
 
-  const getNumber = (min = 1, max = 5) => {
+  const getNumber = (min, max) => {
     const playerChoice = prompt(`Загадай число от ${min} до ${max}`);
+
+    if (playerChoice === null) {
+      return null;
+    }
 
     if (playerChoice >= min && playerChoice <= max) {
       return +playerChoice;
-    } else {
-      return getNumber();
     }
+
+    return getNumber(min, max);
   };
 
   const game = () => {
     const marblesCount = {
       player: 5,
       computer: 5,
-      get result() {
-        if (this.player > this.computer) {
-          return 'Игрок выиграл';
+      checkMarbles() {
+        if (this.player > 0 && this.computer > 0) {
+          return true;
         } else {
-          return 'Компьютер выиграл';
+          return false;
         }
       },
     };
 
-    const gameProgress = () => {
+    const playerTurn = () => {
       console.log(`
         Количество шариков
         Игрок: ${marblesCount.player}
-        Компьютер: ${marblesCount.computer}
+        Бот: ${marblesCount.computer}
       `);
-    };
-
-    console.log('Старт игры');
-
-    return function start() {
-      const player = getNumber();
+      const player = getNumber(1, marblesCount.player);
       const computer = getRandomIntInclusive();
+
+      if (player === null) return null;
 
       if ((player % 2 && computer % 2) ||
         (player % 2 === 0 && computer % 2 === 0)) {
         marblesCount.player -= player;
         marblesCount.computer += player;
+        console.log('Компьютер забирает шарики');
       } else {
         marblesCount.player += player;
         marblesCount.computer -= player;
+        console.log('Игрок забирает шарики');
       }
 
-      if (marblesCount.player <= 0 || marblesCount.computer <= 0) {
-        alert(`${marblesCount.result}`);
-        console.log('Конец игры');
+      if (marblesCount.checkMarbles()) {
+        return playerTurn();
+      }
+    };
+
+    return function start() {
+      console.log('Старт игры');
+      if (playerTurn() !== null) {
+        if (marblesCount.player > marblesCount.computer) {
+          console.log('Конец игры');
+          alert('Игрок выиграл');
+        } else {
+          console.log('Конец игры');
+          alert('Компьютер выиграл');
+        }
       } else {
-        gameProgress();
-        start();
+        console.log('Конец игры');
       }
     };
   };
 
   window.marbles = game;
 })();
-
